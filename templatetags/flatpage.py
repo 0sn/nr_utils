@@ -54,7 +54,7 @@ class FlatpageChildren(template.Node):
     def render(self, context):
         if self.url[0] in ('"',"'"):
             if self.url[0] == self.url[-1] and len(self.url) > 3:
-                urlcontent = self.url
+                urlcontent = self.url[1:-1]
             else:
                 return ""
         else:
