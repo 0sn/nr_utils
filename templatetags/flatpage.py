@@ -58,7 +58,10 @@ class FlatpageChildren(template.Node):
             else:
                 return ""
         else:
+          try:
             urlcontent = template.Variable(self.url).resolve(context)
+          except:
+            return ""
         m = re.search(self.root_regex, urlcontent)
         if not m:
             return ""
