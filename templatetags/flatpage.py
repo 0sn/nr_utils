@@ -58,10 +58,10 @@ class FlatpageChildren(template.Node):
             else:
                 return ""
         else:
-          try:
-            urlcontent = template.Variable(self.url).resolve(context)
-          except:
-            return ""
+            try:
+                urlcontent = template.Variable(self.url).resolve(context)
+            except:
+                return ""
         m = re.search(self.root_regex, urlcontent)
         if not m:
             return ""
@@ -77,7 +77,10 @@ class FlatpageChildren(template.Node):
         cache_key = CACHE_PREFIX + "root_" + root
         c = cache.get(cache_key)
         if c is None:
-            c = FlatPage.objects.get(url=root)
+            try:
+                c = FlatPage.objects.get(url=root)
+            except:
+                return ""
             cache.set(cache_key, c, CACHE_TIME)
         context["flatpage_root"] = c
         return ""
